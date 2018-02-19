@@ -29,9 +29,9 @@ rootFileDir="./ROOTfiles"
 monRootDir="./HISTOGRAMS/${SPEC}/ROOT"
 monPdfDir="./HISTOGRAMS/${SPEC}/PDF"
 reportFileDir="./REPORT_OUTPUT/${SPEC}/PRODUCTION"
-reportMonDir="./UTIL-OL/REP_MON"
+reportMonDir="./UTIL_OL/REP_MON"
 reportMonOutDir="./MON_OUTPUT/REPORT"
-pedMonDir="./UTIL-OL/PED_MON"
+pedMonDir="./UTIL_OL/PED_MON"
 pedMonOutDir="./MON_OUTPUT/PED"
 
 # Name of the pedestal monitoring file
