@@ -12,7 +12,7 @@ fout = open('output.txt','w')
 
 for line in f:
     data = line.split(':')
-    if ('Run #' in data[0])or ('4_of_4 EFF' in data[0])  or ('BCM1 Current'in data[0]) or ('BCM2 Current'in data[0]) or('BCM4a Current' in data[0]) or ('SING FID' in data[0]and 'HADRON' not in data[0])or('Plane 1' in data[0]) or('Plane 2' in data[0])or('Plane 3'in data[0])or ('Plane 4'in data[0]) or ('Pre-Scaled Ps1 SHMS Computer Live Time' in data[0])or ('Pre-Scaled Ps2 SHMS Computer Live Time' in data[0]) or('Pre-Scaled Ps3 SHMS Computer Live Time' in data[0])or('Pre-Trigger' in data[0]):
+    if ('Run #' in data[0])or ('3_of_4 EFF' in data[0])  or ('BCM1 Current'in data[0]) or ('BCM2 Current'in data[0]) or('BCM4a Current' in data[0]) or ('SING FID' in data[0]and 'HADRON' not in data[0])or('Plane 1' in data[0]) or('Plane 2' in data[0])or('Plane 3'in data[0])or ('Plane 4'in data[0]) or ('Pre-Scaled Ps1 SHMS Computer Live Time' in data[0])or ('Pre-Scaled Ps2 SHMS Computer Live Time' in data[0]) or('Pre-Scaled Ps3 SHMS Computer Live Time' in data[0]):
       
 
         # print (data[0]+ ': '+ data[1])

@@ -3,7 +3,7 @@ void hms_ped(Int_t runNumber, Int_t eventNumber)
 {
   const Int_t run          = runNumber;
   const  Int_t nevents     = eventNumber;
-  const Int_t goldRunNum   = 1292;
+  const Int_t goldRunNum   = 1536;
   const Int_t numHistos  = 3;       //Number of histos
 
   // Define golden run in which to compare current run to
