@@ -4,7 +4,7 @@ void shms_ped(Int_t runNumber, Int_t eventNumber)
 
   const Int_t run        = runNumber;
   const Int_t nevents    = eventNumber;
-  const Int_t goldRunNum = 1757;
+  const Int_t goldRunNum = 2467;
   const Int_t numHistos  = 5;     //Number of histos
 
   // Define golden run in which to compare current run to
