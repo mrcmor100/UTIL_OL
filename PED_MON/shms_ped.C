@@ -82,7 +82,7 @@ void shms_ped(Int_t runNumber, Int_t eventNumber)
  
   for (int i = 0; i < numHistos-2 ; i++)
     {
-      if(abs(meanDiff[i])>2.5) //The following message will appear in terminal if Pedestal mean differnce is greater than 2.5
+      if(fabs(meanDiff[i])>2.5) //The following message will appear in terminal if Pedestal mean differnce is greater than 2.5
 	{
 	  
 cout<<"_____________________________________________________________________"<<endl;
