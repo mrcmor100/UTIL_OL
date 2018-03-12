@@ -1,5 +1,5 @@
 //Read one 1D histogram from rootfile
-void shms_ped(Int_t runNumber, Int_t eventNumber)
+void shms_coin_ped(Int_t runNumber, Int_t eventNumber)
 {
 
   const Int_t run        = runNumber;
@@ -88,7 +88,7 @@ void shms_ped(Int_t runNumber, Int_t eventNumber)
  
   for (int i = 0; i < numHistos-2 ; i++)
     {
-      if(abs(meanDiff[i])>2.5) //The following message will appear in terminal if Pedestal mean differnce is greater than 2.5
+      if(fabs(meanDiff[i])>2.5) //The following message will appear in terminal if Pedestal mean differnce is greater than 2.5
 	{
 	  
 cout<<"_____________________________________________________________________"<<endl;

@@ -1,6 +1,6 @@
 //Read one 1D histogram from rootfile
 
-void hms_ped(Int_t runNumber, Int_t eventNumber)
+void hms_coin_ped(Int_t runNumber, Int_t eventNumber)
 {
   const Int_t run          = runNumber;
   const  Int_t nevents     = eventNumber;
@@ -93,23 +93,23 @@ void hms_ped(Int_t runNumber, Int_t eventNumber)
   
   for (int i = 0; i<numHistos ; i++)
     {
-      if(abs(meanDiff[i])>2.5) // //The following message will appear in terminal if Pedestal mean differnce is greater than 2.5
+      if(fabs(meanDiff[i])>2.5) // //The following message will appear in terminal if Pedestal mean differnce is greater than 2.5
 	{
 	  cout<<"_____________________________________________________________________"<<endl;
 	  cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!Attention Needed !!!!!!!!!!!!!!!!!!!!!" << endl;
 	  cout<<"_____________________________________________________________________"<<endl;
 	 
 	  cout << "--------------------See ROC1 --- SLOT 17---------------------------" << endl;//hallc_replay/MAPS/HMS/DETEC/TRIG/htrig.map
-	  cout << "-----SEE THE PROBLEMATIC CHANNELS FOR HMS TRIGGER SUM PPED---------"<<endl;
-	  cout<<  "THE FOLLOWING FIGURES ARE THE VALUES OF HMS TRIGGER PULSE PEDESTALS"<<endl; 
-	  cout<<  "------------- FOR SHWER SUM, PRESHWER SUM AND CERENKOV SUM---------"<<endl;
-	  cout << "NOTE----> MEAN VALUE OF PULSE PEDESTALS OF HMS GOLDEN RUN = MG-----"<<endl;
-          cout<<  "NOTE----> MEAN FOR CURRENT RUN  = M  AND THEIR DIFFERNCE = MD------"<<endl;
-          cout << "---------------ABSOLUTE VALUE OF MD should be < 2.5----------------"<< endl;
-	  cout<< "------------BUT HERE YOU SEE THE MG VALUE(S) > 2.5-----------------"<<endl;
-	  cout << "-----------------PLEASE CONSULT WITH  SHIFT LEADER-----------------" <<endl;
-          cout<<"_____________________________________________________________________"<<endl;
-	  cout << "!!!!!!!!!!!!!!!!!Attention Needed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+	  cout<<"___________________________________________________________________________________"<<endl;
+	  cout<<"Golden Run = "<<goldRunNum<<"     "<<"AND""     "<<"This Run = "<<run<<endl;
+	  cout<<"___________________________________________________________________________________"<<endl;
+	  cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Attention Needed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+	  cout<<"___________________________________________________________________________________"<<endl;
+	  cout<<" HERE THE MEAN DIFFERNCE OF PULSE PEDUSTAL BETWEEN GOLDEN RUN (MG) AND"<<endl;
+	  cout<<"CURRENT RUN (M) IS GREATER THAN 2.5 mV FOR THE FOLLOWING HISTOGRAM(S)"<<endl;
+	  cout<<"PLEASE CONSULT WITH BRAD SAWATZKY (brads@jlab.org) or ERIC POOSER(pooser@jlab.org)"<<endl;
+	  cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Attention Needed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+	  cout<<"___________________________________________________________________________________"<<endl;
 	  cout << setprecision(4) << fixed <<"chan"<<" "<< channel[i] << " " <<"bar"<<" "<< bar[i] 
 	       << "\t" <<  variables[i] << "\t" <<"MG"<<"  "<<meanG[i] <<"  " 
 	       <<"M"<<"  "<< mean[i] <<" " <<"MD"<<" "<< meanDiff[i] << endl;//MG=mean golden,M = mean current, MD = mean diff
