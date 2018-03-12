@@ -1,5 +1,5 @@
 //Read one 1D histogram from rootfile
-void shms_ped(Int_t runNumber, Int_t eventNumber)
+void shms_coin_ped(Int_t runNumber, Int_t eventNumber)
 {
 
   const Int_t run        = runNumber;
