@@ -1,4 +1,4 @@
-/This macro reads the SHMS histograms from Rootfile and reads the values of pedestals in each PMTs for, trigger, Hodoscopes, calorimeter, HGCER,  NGCERand Aerogel.
+//This macro reads the SHMS histograms from Rootfile and reads the values of pedestals in each PMTs for, trigger, Hodoscopes, calorimeter, HGCER,  NGCERand Aerogel.
 const Int_t goldRunNum1  = 2467;// for trig only
 const Int_t goldRunNum   = 2687;// for detectors only
 ofstream myfile;
@@ -35,7 +35,7 @@ void trig(Int_t runNumber, Int_t eventNumber)
 
   myfile.open("outSHMS.txt");
 
-  TFile *f1 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_50000.root", goldRunNum1));//Golden Run for Trigger only
+  TFile *f1 = new TFile(Form("ROOTfiles/shms_replay_production_%d_50000.root", goldRunNum1));//Golden Run for Trigger only
   myfile <<"___________________________________________________________________________"<<endl;
   myfile <<"SHMS TRIGGER GOLDEN  RUN NUMBER    =" "  "<<goldRunNum1<<endl;
   myfile <<"SHMS TRIGGER CURRENT RUN NUMBER    =" "  "<<run<<endl;
@@ -77,7 +77,7 @@ void trig(Int_t runNumber, Int_t eventNumber)
         }
     }
  
-  TFile *f2= new TFile(Form("../../ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));  // no golden
+  TFile *f2= new TFile(Form("ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));  // no golden
 
   for (int i = 0; i < numHistos-2 ; i++)
     {
@@ -97,7 +97,7 @@ void trig(Int_t runNumber, Int_t eventNumber)
   for (int i = 0; i < numHistos-2 ; i++)
     {
       //open this cout if we want to print values in terminal
-      cout<<    setprecision(2) << fixed  <<histos[i]<<"\t\t"<<" Mean_Golden  ="<<meanG[i]<<"\t\t"<<"Mean_Current  ="<<mean[i]<<"\t\t"<<"Mean_Diff  ="<<meanDiff[i]<<endl;
+      //  cout<<    setprecision(2) << fixed  <<histos[i]<<"\t\t"<<" Mean_Golden  ="<<meanG[i]<<"\t\t"<<"Mean_Current  ="<<mean[i]<<"\t\t"<<"Mean_Diff  ="<<meanDiff[i]<<endl;
 
       //cout <<channel[i]<<""<<"\t"<< bar[i]<<"\t"<<histos[i]<<"\t"<<"\t"<<meanG[i]<<"\t\t"<<mean[i]<<"\t\t"<<meanDiff[i]<<endl;
       myfile << setprecision(2) << fixed <<histos[i]<<"\t"<<"\t"<<meanG[i]<<"\t\t"<<mean[i]<<"\t\t"<<meanDiff[i]<<endl;//to store values in .txt file
@@ -147,8 +147,8 @@ void hodo(Int_t runNumber, Int_t eventNumber)
   Double_t mean1[122];
   Double_t mean11[122];
   Double_t meanDiff1[122];
-  TFile *f3 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
-  TFile *f4 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfile
+  TFile *f3 = new TFile(Form("ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
+  TFile *f4 = new TFile(Form("ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfile
 
   myfile <<"SHMS PEDESTAL GOLDEN  RUN NUMBER  =" "    "<<goldRunNum<<endl;
   myfile <<"SHMS PEDESTAL CURRENT  RUN NUMBER =" "    "<<run<<endl;
@@ -200,7 +200,7 @@ void hodo(Int_t runNumber, Int_t eventNumber)
               mean11[k] = projHist11->GetMean();//Mean Current 
               meanDiff1[k] = fabs(mean1[k]-mean11[k]);//Mean Diff
 
-              cout <<  setprecision(2) << fixed<< hist1Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean1[k]<<  " & " << "Mean_Current ="<<mean11[k]<<" Mean_Diff = "<<fabs(mean1[k]-mean11[k])<<endl;
+	      //  cout <<  setprecision(2) << fixed<< hist1Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean1[k]<<  " & " << "Mean_Current ="<<mean11[k]<<" Mean_Diff = "<<fabs(mean1[k]-mean11[k])<<endl;
               myfile << setprecision(2) << fixed <<"-----"<< hist1Name << "\t"<<"PMT ="<<"\t"<<k+1<<"\t"<<mean1[k]<<"\t\t"<< mean11[k]<<"\t\t"<< meanDiff1[k]<<endl;//to store values in .txt file
                   
               if (mean11[k]!=0.0) {
@@ -240,8 +240,8 @@ void calprshwr(Int_t runNumber, Int_t eventNumber)
 
   const Int_t run      = runNumber;
   const Int_t nevents  = eventNumber;
-  TFile *f3 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
-  TFile *f4 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfileDouble_t mean1[1000];
+  TFile *f3 = new TFile(Form("ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
+  TFile *f4 = new TFile(Form("ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfileDouble_t mean1[1000];
   Double_t mean2[28];
   Double_t mean22[28];
   Double_t meanDiff2[28];
@@ -274,7 +274,7 @@ void calprshwr(Int_t runNumber, Int_t eventNumber)
           mean22[k] = projHist22->GetMean();//Mean Current
           meanDiff2[k] = fabs(mean2[k]-mean22[k]);//Mean Diff
                      
-          cout <<  setprecision(2) << fixed <<hist2Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean2[k]<<  " & " << "Mean_Current ="<<mean22[k]<<" Mean_Diff = "<<meanDiff2[k]<<endl;
+	  //  cout <<  setprecision(2) << fixed <<hist2Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean2[k]<<  " & " << "Mean_Current ="<<mean22[k]<<" Mean_Diff = "<<meanDiff2[k]<<endl;
           myfile << setprecision(2) << fixed << hist2Name << "\t"<< "PMT ="<<"\t"<<k+1<<"\t"<<mean2[k]<<"\t\t"<< mean22[k]<<"\t\t"<< meanDiff2[k]<<endl;//to store values in .txt file
 
 
@@ -315,8 +315,8 @@ void calshwr(Int_t runNumber, Int_t eventNumber)
  
   const Int_t run      = runNumber;
   const Int_t nevents  = eventNumber;
-  TFile *f3 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
-  TFile *f4 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfile
+  TFile *f3 = new TFile(Form("ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
+  TFile *f4 = new TFile(Form("ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfile
   Double_t mean3[224];
   Double_t mean33[224];
   Double_t meanDiff3[224];
@@ -349,7 +349,7 @@ void calshwr(Int_t runNumber, Int_t eventNumber)
           mean33[k] = projHist33->GetMean();
           meanDiff3[k] = fabs(mean3[k]-mean33[k]);//Taking Absolute mean differnce
 
-          cout <<  setprecision(2) << fixed<< hist3Name<< " " " PMT =  "<< k+1<< "\t"<< "Mean_Golden =  "<<mean3[k]<<  " & " << "Mean_Current = "<<mean33[k]<<" Mean_Diff = "<<meanDiff3[k]<<endl;
+	  //  cout <<  setprecision(2) << fixed<< hist3Name<< " " " PMT =  "<< k+1<< "\t"<< "Mean_Golden =  "<<mean3[k]<<  " & " << "Mean_Current = "<<mean33[k]<<" Mean_Diff = "<<meanDiff3[k]<<endl;
 
           myfile << setprecision(2) << fixed <<"----"<< hist3Name << "\t\t"<< "PMT ="<<"\t"<<k+1<<"\t"<<mean3[k]<<"\t\t"<< mean33[k]<<"\t\t"<< meanDiff3[k]<<endl;//to store values in .txt file
 
@@ -390,8 +390,8 @@ void hgcer(Int_t runNumber, Int_t eventNumber)
 {  
   const Int_t run      = runNumber;
   const Int_t nevents  = eventNumber;
-  TFile *f3 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
-  TFile *f4 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfile
+  TFile *f3 = new TFile(Form("ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
+  TFile *f4 = new TFile(Form("ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfile
   Double_t mean4[4];
   Double_t mean44[4];
   Double_t meanDiff4[4];
@@ -419,7 +419,7 @@ void hgcer(Int_t runNumber, Int_t eventNumber)
           mean44[k] = projHist44->GetMean();//Mean Current
           meanDiff4[k] =fabs(mean4[k]-mean44[k]);//Takes mean diff
           //cout << setprecision(2) << fixed<<mean[k]<<"  "<<mean1[k]<<" "<<fabs(meanDiff[k])<<endl;
-          cout <<  setprecision(2) << fixed<< hist4Name<< " " " PMT = "<< k+1 <<"""Mean_Golden = "<<mean4[k]<<  " & " << "Mean_Current = "<<mean44[k]<<" Mean_Diff = "<<meanDiff4[k]<<endl;
+	  // cout <<  setprecision(2) << fixed<< hist4Name<< " " " PMT = "<< k+1 <<"""Mean_Golden = "<<mean4[k]<<  " & " << "Mean_Current = "<<mean44[k]<<" Mean_Diff = "<<meanDiff4[k]<<endl;
 
 
           myfile << setprecision(2) << fixed <<"-------"<< hist4Name << "\t\t"<< "PMT ="<<"\t"<<k+1<<"\t"<<mean4[k]<<"\t\t"<< mean44[k]<<"\t\t"<< meanDiff4[k]<<endl;//to store values in .txt file
@@ -458,8 +458,8 @@ void ngcer(Int_t runNumber, Int_t eventNumber)
 
   const Int_t run      = runNumber;
   const Int_t nevents  = eventNumber;
-  TFile *f3 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
-  TFile *f4 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfile
+  TFile *f3 = new TFile(Form("ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
+  TFile *f4 = new TFile(Form("ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfile
   Double_t mean5[4];
   Double_t mean55[4];
   Double_t meanDiff5[4];
@@ -488,7 +488,7 @@ void ngcer(Int_t runNumber, Int_t eventNumber)
           mean55[k] = projHist55->GetMean();//Mean Current
           meanDiff5[k] = fabs(mean5[k]-mean55[k]);//Mean Diff
 
-          cout <<  setprecision(2) << fixed<< hist5Name<< " " " PMT = "<< k+1 <<"""Mean_Golden = "<<mean5[k]<<  " & " << "Mean_Current = "<<mean55[k]<<" Mean_Diff = "<< meanDiff5[k]<<endl;
+	  //   cout <<  setprecision(2) << fixed<< hist5Name<< " " " PMT = "<< k+1 <<"""Mean_Golden = "<<mean5[k]<<  " & " << "Mean_Current = "<<mean55[k]<<" Mean_Diff = "<< meanDiff5[k]<<endl;
 
           myfile << setprecision(2) << fixed <<"--------"<< hist5Name << "\t\t"<< "PMT ="<<"\t"<<k+1<<"\t"<<mean5[k]<<"\t\t"<< mean55[k]<<"\t\t"<< meanDiff5[k]<<endl;//to store values in .txt file
 
@@ -526,8 +526,8 @@ void aero(Int_t runNumber, Int_t eventNumber)
 {
   const Int_t run      = runNumber;
   const Int_t nevents  = eventNumber;
-  TFile *f3 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
-  TFile *f4 = new TFile(Form("../../ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfile
+  TFile *f3 = new TFile(Form("ROOTfiles/shms_replay_production_%d_50000.root",goldRunNum));//Golden ROOTfile Detectors only
+  TFile *f4 = new TFile(Form("ROOTfiles/shms_replay_production_%d_%d.root",run,nevents));//Takes Current ROOTfile
   Double_t mean6[14];
   Double_t mean66[14];
   Double_t meanDiff6[14];
@@ -559,7 +559,7 @@ void aero(Int_t runNumber, Int_t eventNumber)
           mean66[k] = projHist66->GetMean();//Mean Current
           meanDiff6[k] = fabs(mean6[k]-mean66[k]);//Mean Diff
                      
-          cout <<  setprecision(2) << fixed<< hist6Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean6[k]<<  " & " << "Mean_Current ="<<mean66[k]<<" Mean_Diff = "<<meanDiff6[k]<<endl;
+	  //  cout <<  setprecision(2) << fixed<< hist6Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean6[k]<<  " & " << "Mean_Current ="<<mean66[k]<<" Mean_Diff = "<<meanDiff6[k]<<endl;
           myfile << setprecision(2) << fixed <<"------"<< hist6Name << "\t"<< "PMT ="<<"\t"<<k+1<<"\t"<<mean6[k]<<"\t\t"<< mean66[k]<<"\t\t"<< meanDiff6[k]<<endl;//to store values in .txt file
 
           if (mean66[k]!=0.0) {

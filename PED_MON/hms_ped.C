@@ -1,6 +1,7 @@
-/This macro reads the HMS histograms from Rootfile and reads the values of pedestals in each PMTs for, trigger, Hodoscopes, calorimeter, and Cerenkov.
+//This macro reads the HMS histograms from Rootfile and reads the values of pedestals in each PMTs for, trigger, Hodoscopes, calorimeter, and Cerenkov.
 
-const Int_t goldRunNum1   = 1536;           // For Trig only
+//const Int_t goldRunNum1   = 1536;           // For Trig only :DIDNT WORK now and says  CANT FIND ROOTFILE (actual golden runn foe trig is 1536)
+const Int_t goldRunNum1 = 1940;
 const Int_t goldRunNum    = 1782;  //for detectors
 ofstream myfile;
 //myfile.open("outHMS.txt");//To store ped diff
@@ -39,7 +40,7 @@ void trigger(Int_t runNumber, Int_t eventNumber)
    myfile.open("outHMS.txt");//To store ped diff
    
  
-  TFile *f1 = new TFile(Form("../../ROOTfiles/hms_replay_production_%d_50000.root",goldRunNum1));//Golden_Rootfile for trigger only
+  TFile *f1 = new TFile(Form("ROOTfiles/hms_replay_production_%d_50000.root",goldRunNum1));//Golden_Rootfile for trigger only
     
   myfile <<"______________________________________________________________________________________"<<endl;
   myfile <<"HMS TRIGGER GOLDEN  RUN NUMBER    =" "    "<<goldRunNum1<<endl;
@@ -82,7 +83,7 @@ void trigger(Int_t runNumber, Int_t eventNumber)
         }
     }
  
-  TFile *f2 = new TFile(Form("../../ROOTfiles/hms_replay_production_%d_%d.root",run,nevents));      // no golden
+  TFile *f2 = new TFile(Form("ROOTfiles/hms_replay_production_%d_%d.root",run,nevents));      // no golden
 
 
   for (int i = 0; i<numHistos ; i++)
@@ -103,9 +104,9 @@ void trigger(Int_t runNumber, Int_t eventNumber)
   for (int i = 0; i<numHistos ; i++)
     {
       //open this cout if we want to print values in terminal
-      cout << setprecision(2) << fixed <<histos[i]<<""<<"\t"<< bar[i]<<"\t"<<variables[i]<<"\t"<<"\t"<<meanG[i]<<"\t\t"<<mean[i]<<"\t\t"<<meanDiff[i]<<endl;
+      // cout << setprecision(2) << fixed <<histos[i]<<""<<"\t"<< bar[i]<<"\t"<<variables[i]<<"\t"<<"\t"<<meanG[i]<<"\t\t"<<mean[i]<<"\t\t"<<meanDiff[i]<<endl;
 
-      myfile<<histos[i]<<"\t"<<"\t"<<meanG[i]<<"\t\t"<<mean[i]<<"\t\t"<<meanDiff[i]<<endl;//to stores values in .txt file
+      myfile <<  setprecision(2) << fixed<< histos[i]<<"\t"<<"\t"<<meanG[i]<<"\t\t"<<mean[i]<<"\t\t"<<meanDiff[i]<<endl;//to stores values in .txt file
 
 
     }
@@ -149,8 +150,8 @@ void hodo(Int_t runNumber, Int_t eventNumber)
 {
   const Int_t run           = runNumber;
   const Int_t nevents       = eventNumber;
-  TFile *f3 = new TFile(Form("../../ROOTfiles/hms_replay_production_%d_50000.root",goldRunNum));//Golden_Rootfile for detectors only
-  TFile *f4 = new TFile(Form("../../ROOTfiles/hms_replay_production_%d_%d.root",run,nevents));//Current Rootfile
+  TFile *f3 = new TFile(Form("ROOTfiles/hms_replay_production_%d_50000.root",goldRunNum));//Golden_Rootfile for detectors only
+  TFile *f4 = new TFile(Form("ROOTfiles/hms_replay_production_%d_%d.root",run,nevents));//Current Rootfile
 
   myfile <<"________________________________________________________________________________________"<<endl;
   myfile <<"HMS PEDESTAL GOLDEN  RUN NUMBER    =" "    "<<goldRunNum<<endl;
@@ -202,7 +203,7 @@ void hodo(Int_t runNumber, Int_t eventNumber)
               meanDiff1[k] = fabs(mean1[k]-mean11[k]);//Mean Diff
 
               // cout <<hist1Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean1[k]<<  " & " << "Mean_Current ="<<mean11[k]<<" Mean1_Diff = "<<fabs(mean1[k]-mean11[k])<<endl;
-               cout << setprecision(2) << fixed <<hist1Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean1[k]<<  " & " << "Mean_Current ="<<mean11[k]<<" Mean1_Diff = "<< meanDiff1[k]<<endl;
+	      //  cout << setprecision(2) << fixed <<hist1Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean1[k]<<  " & " << "Mean_Current ="<<mean11[k]<<" Mean1_Diff = "<< meanDiff1[k]<<endl;
 
               myfile << setprecision(2) << fixed << hist1Name << "\t"<< "PMT ="<<"\t"<<k+1<<"\t"<<mean1[k]<<"\t\t"<< mean11[k]<<"\t\t"<< meanDiff1[k]<<endl;//to store values in .txt file
               if (mean11[k]!=0.0) {
@@ -242,8 +243,8 @@ void cal(Int_t runNumber, Int_t eventNumber)
 {
   const Int_t run           = runNumber;
   const Int_t nevents       = eventNumber;
-  TFile *f3 = new TFile(Form("../../ROOTfiles/hms_replay_production_%d_50000.root",goldRunNum));//Golden_Rootfile for detectors only
-  TFile *f4 = new TFile(Form("../../ROOTfiles/hms_replay_production_%d_%d.root",run,nevents));//Current Rootfile
+  TFile *f3 = new TFile(Form("ROOTfiles/hms_replay_production_%d_50000.root",goldRunNum));//Golden_Rootfile for detectors only
+  TFile *f4 = new TFile(Form("ROOTfiles/hms_replay_production_%d_%d.root",run,nevents));//Current Rootfile
   Double_t mean2[52];
   Double_t mean22[52];
   Double_t meanDiff2[52];//Randomly taken 1000
@@ -281,7 +282,7 @@ void cal(Int_t runNumber, Int_t eventNumber)
               mean22[k] = projHist22->GetMean();//Getting Mean from Current Run
               meanDiff2[k] = fabs(mean2[k]-mean22[k]);//Mean Diff
              
-               cout << setprecision(2) << fixed  <<hist2Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean2[k]<<  " & " << "Mean_Current ="<<mean22[k]<<" Mean_Diff = "<<meanDiff2[k]<<endl;
+              // cout << setprecision(2) << fixed  <<hist2Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean2[k]<<  " & " << "Mean_Current ="<<mean22[k]<<" Mean_Diff = "<<meanDiff2[k]<<endl;
              
               myfile<<hist2Name << "\t"<< "PMT ="<<"\t"<<k+1<<"\t"<<mean2[k]<<"\t\t"<< mean22[k]<<"\t\t"<< meanDiff2[k]<<endl;//to store values in .txt file
               if (mean22[k]!=0.0) {
@@ -320,8 +321,8 @@ void calo(Int_t runNumber, Int_t eventNumber)
 {
   const Int_t run           = runNumber;
   const Int_t nevents       = eventNumber;
-  TFile *f3 = new TFile(Form("../../ROOTfiles/hms_replay_production_%d_50000.root",goldRunNum));//Golden_Rootfile for detectors only
-  TFile *f4 = new TFile(Form("../../ROOTfiles/hms_replay_production_%d_%d.root",run,nevents));//Current Rootfile
+  TFile *f3 = new TFile(Form("ROOTfiles/hms_replay_production_%d_50000.root",goldRunNum));//Golden_Rootfile for detectors only
+  TFile *f4 = new TFile(Form("ROOTfiles/hms_replay_production_%d_%d.root",run,nevents));//Current Rootfile
      
   Double_t mean3[26];
   Double_t mean33[26];
@@ -363,7 +364,7 @@ void calo(Int_t runNumber, Int_t eventNumber)
               mean33[k] = projHist33->GetMean();//Mean Current
               meanDiff3[k] = fabs(mean3[k]-mean33[k]);//Mean Diff
 
-   cout << setprecision(2) << fixed << hist3Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean3[k]<<  " & " << "Mean_Current ="<<mean33[k]<<" Mean_Diff = "<<meanDiff3[k]<<endl;
+	      // cout << setprecision(2) << fixed << hist3Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean3[k]<<  " & " << "Mean_Current ="<<mean33[k]<<" Mean_Diff = "<<meanDiff3[k]<<endl;
                 
               myfile<<hist3Name << "\t"<< "PMT ="<<"\t"<<k+1<<"\t"<<mean3[k]<<"\t\t"<< mean33[k]<<"\t\t"<< meanDiff3[k]<<endl;//to store values in .txt file
               if (mean33[k]!=0.0) {
@@ -407,8 +408,8 @@ void cer(Int_t runNumber, Int_t eventNumber)
 {
 const Int_t run           = runNumber;
 const Int_t nevents       = eventNumber;
-TFile *f3 = new TFile(Form("../../ROOTfiles/hms_replay_production_%d_50000.root",goldRunNum));//Golden_Rootfile for detectors only
-TFile *f4 = new TFile(Form("../../ROOTfiles/hms_replay_production_%d_%d.root",run,nevents));//Current Rootfile
+TFile *f3 = new TFile(Form("ROOTfiles/hms_replay_production_%d_50000.root",goldRunNum));//Golden_Rootfile for detectors only
+TFile *f4 = new TFile(Form("ROOTfiles/hms_replay_production_%d_%d.root",run,nevents));//Current Rootfile
      
 
 Double_t mean4[2];
@@ -443,7 +444,7 @@ for(int i = 0; i < 1; ++i)//plane
         mean44[k] = projHist44->GetMean();//Mean current
         meanDiff4[k] = fabs(mean4[k]-mean44[k]);//Mean Diff
 
-    cout << setprecision(2) << fixed  <<hist4Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean4[k]<<  " & " << "Mean_Current ="<<mean44[k]<<" Mean_Diff = "<<meanDiff4[k]<<endl;
+	//  cout << setprecision(2) << fixed  <<hist4Name<< " PMT = "<< k+1 <<"  Mean_Golden = "<<mean4[k]<<  " & " << "Mean_Current ="<<mean44[k]<<" Mean_Diff = "<<meanDiff4[k]<<endl;
 
         myfile<<"------"<< hist4Name  << "\t"<< "PMT  ="<<"\t"<<k+1<<"\t"<<mean4[k]<<"\t\t"<< mean44[k]<<"\t\t"<< meanDiff4[k]<<endl;//to store values in .txt file
         if (mean44[k]!=0.0) {
