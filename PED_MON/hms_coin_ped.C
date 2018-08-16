@@ -1,8 +1,8 @@
 //This macro reads the HMS histograms from Rootfile and reads the values of pedestals in each PMTs for, trigger, Hodoscopes, calorimeter, and Cerenkov.
 
 //const Int_t goldRunNum1   = 1536;           // For Trig only :DIDNT WORK now and says  CANT FIND ROOTFILE (actual golden runn for trig is 1536)
-const Int_t goldRunNum1 = 1940;
-const Int_t goldRunNum    = 1782;  //for detectors
+const Int_t goldRunNum1 = 2346;
+const Int_t goldRunNum  = 2346;  //for detectors
 ofstream myfile;
 //myfile.open("outHMS.txt");//To store ped diff
 
