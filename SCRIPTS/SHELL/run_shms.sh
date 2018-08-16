@@ -42,7 +42,7 @@ pedMonFile="pedReport_${spec}_${runNum}_${numEvents}.txt"
 runHcana="./hcana -q \"${script}(${runNum}, ${numEvents})\""
 runOnlineGUI="./online -f ${config} -r ${runNum}"
 saveOnlineGUI="./online -f ${config} -r ${runNum} -P"
-runReportMon="./${reportMonDir}/readout_${spec}.py ${runNum} ${numEvents}"
+runReportMon="./${reportMonDir}/reportSummary.py ${runNum} ${numEvents} ${spec} singles"
 runPedMon="root -l -q \"${pedMonDir}/${spec}_ped.C(${runNum}, ${numEvents})\""
 openReportMon="emacs ${reportMonOutDir}/${reportMonFile}"
 

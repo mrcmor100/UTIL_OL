@@ -37,7 +37,7 @@ reportMonOutDir="./MON_OUTPUT/REPORT"
 pedMonDir="./UTIL_OL/PED_MON"
 pedMonOutDir="./MON_OUTPUT/PED" 
 
-# Name of the pedestal monitoring file  
+# Name of the pedestal monitoring file
 reportMonFile="reportMonitor_${spec}_${runNum}_${numEvents}.txt" 
 pedMonFile="pedReport_${spec}_${runNum}_${numEvents}.txt" 
 
@@ -45,7 +45,7 @@ pedMonFile="pedReport_${spec}_${runNum}_${numEvents}.txt"
 runHcana="./hcana -q \"${script}(${runNum}, ${numEvents})\""
 runOnlineGUI="./online -f ${config} -r ${runNum}"
 saveOnlineGUI="./online -f ${config} -r ${runNum} -P"
-runReportMon="./${reportMonDir}/readout_coin_${spec}.py ${runNum} ${numEvents}" 
+runReportMon="./${reportMonDir}/reportSummary.py ${runNum} ${numEvents} ${spec} coin"
 runPedMon="root -l -q \"${pedMonDir}/${spec}_coin_ped.C(${runNum}, ${numEvents})\""
 openReportMon="emacs ${reportMonOutDir}/${reportMonFile}"  
 
