@@ -1,6 +1,6 @@
 //This macro reads the SHMS histograms from Rootfile and reads the values of pedestals in each PMTs for, trigger, Hodoscopes, calorimeter, HGCER,  NGCERand Aerogel.
-const Int_t goldRunNum1  = 2467;// for trig only
-const Int_t goldRunNum   = 2687;// for detectors only
+const Int_t goldRunNum1  = 2484;// for trig only
+const Int_t goldRunNum   = 2484;// for detectors only
 ofstream myfile;
 
 void trig(Int_t, Int_t);
@@ -21,7 +21,7 @@ void shms_coin_ped(Int_t runNumber, Int_t eventNumber)//MAIN FUNCTION
   calprshwr(runNumber, eventNumber);
   calshwr(runNumber, eventNumber);
   hgcer(runNumber, eventNumber);
-  ngcer(runNumber, eventNumber);
+  // ngcer(runNumber, eventNumber);
   aero(runNumber, eventNumber);
  
 }
@@ -31,7 +31,8 @@ void trig(Int_t runNumber, Int_t eventNumber)
 
   const Int_t run          = runNumber;
   const Int_t nevents      = eventNumber;
-  const Int_t numHistos    = 5;     //Number of histos for Trig only
+  // const Int_t numHistos    = 5;     //Number of histos for Trig only
+  const Int_t numHistos    = 4;     //Number of histos for Trig only
 
   myfile.open("outSHMS.txt");
 
@@ -47,8 +48,10 @@ void trig(Int_t runNumber, Int_t eventNumber)
   TH1D *histG[numHistos];
   TH1D *hist[numHistos];
   Int_t channel[5] = {1,2,3,4,5}; //(see hallc_replay/MAPS/SHMS/DETEC/TRIG/ptrig.map)
-  TString variables[numHistos] = {"pHGCER", "pNGCER", "pPSHWR", "pHG_MOD", "pNG_MOD"};
-  TString histos[numHistos]    = {"ptrig_phgc_sum_pped", "ptrig_pngc_sum_pped", "ptrig_prshwr_sum_pped", "ptrig_phgc_sum_MOD_pped", "ptrig_pngc_sum_MOD_pped"};
+  // TString variables[numHistos] = {"pHGCER", "pNGCER", "pPSHWR", "pHG_MOD", "pNG_MOD"};
+  // TString histos[numHistos]    = {"ptrig_phgc_sum_pped", "ptrig_pngc_sum_pped", "ptrig_prshwr_sum_pped", "ptrig_phgc_sum_MOD_pped", "ptrig_pngc_sum_MOD_pped"};
+  TString variables[numHistos] = {"pHGCER", "pPSHWR", "pHG_MOD", "pNG_MOD"};
+  TString histos[numHistos]    = {"ptrig_phgc_sum_pped", "ptrig_prshwr_sum_pped", "ptrig_phgc_sum_MOD_pped", "ptrig_pngc_sum_MOD_pped"};
  
   //Int_t plane=1;
   Int_t bar [5]={2,3,4,6,7}; //variables are corresponding to these bars
