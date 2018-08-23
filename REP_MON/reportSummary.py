@@ -14,7 +14,7 @@ f    = open(filename)
 fout = open('output.txt','w')
 
 objList = ['Run #', 
-           'BCM1 Beam Cut Current', 'BCM2 Beam Cut Current', 'BCM4a Beam Cut Current', 'BCM4b Beam Cut Current',
+           'BCM1 Beam Cut Current', 'BCM2 Beam Cut Current', 'BCM4A Beam Cut Current', 'BCM4B Beam Cut Current', 'BCM4C Beam Cut Current',
            'SING FID TRACK EFFIC', 
            'Plane 1', 'Plane 2', 'Plane 3', 'Plane 4', '3_of_4 EFF']
 
@@ -24,7 +24,7 @@ if (setting == 'singles') :
 
 if (setting == 'coin') :
     psList     = ['1', '2', '3', '4', '5', '6']
-    psNameList = ['SHMS 3/4', 'SHMS EL-REAL', 'SHMS EL-CLEAN', 'HMS 3/4', 'Unused', 'SHMS 3/4 x HMS 3/4']
+    psNameList = ['SHMS 3/4', 'SHMS EL-REAL', 'HMS EL-REAL', 'HMS 3/4', 'HMS EL-REAL x SHMS 3/4', 'SHMS 3/4 x HMS 3/4']
 
 for line in f:
     data = line.split(':')
