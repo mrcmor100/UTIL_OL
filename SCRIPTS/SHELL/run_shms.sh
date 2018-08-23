@@ -31,19 +31,15 @@ monPdfDir="./HISTOGRAMS/${SPEC}/PDF"
 reportFileDir="./REPORT_OUTPUT/${SPEC}/PRODUCTION"
 reportMonDir="./UTIL_OL/REP_MON"
 reportMonOutDir="./MON_OUTPUT/REPORT"
-pedMonDir="./UTIL_OL/PED_MON"
-pedMonOutDir="./MON_OUTPUT/PED"
 
-# Name of the pedestal monitoring file
+# Name of the report monitoring file
 reportMonFile="reportMonitor_${spec}_${runNum}_${numEvents}.txt"
-pedMonFile="pedReport_${spec}_${runNum}_${numEvents}.txt"
 
 # Which commands to run.
 runHcana="./hcana -q \"${script}(${runNum}, ${numEvents})\""
 runOnlineGUI="./online -f ${config} -r ${runNum}"
 saveOnlineGUI="./online -f ${config} -r ${runNum} -P"
 runReportMon="./${reportMonDir}/reportSummary.py ${runNum} ${numEvents} ${spec} singles"
-runPedMon="root -l -q \"${pedMonDir}/${spec}_ped.C(${runNum}, ${numEvents})\""
 openReportMon="emacs ${reportMonOutDir}/${reportMonFile}"
 
 # Name of the replay ROOT file
@@ -64,7 +60,6 @@ summaryFile="${reportFileDir}/summary_production_${runNum}_${numEvents}.txt"
 # What is base name of onlineGUI output.
 outFile="${spec}_production_${runNum}"
 outFileMonitor="output.txt"
-outFilePed="out${SPEC}.txt"
 
 # Replay out files
 replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEvents}.txt"
@@ -72,7 +67,7 @@ replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEv
 # Start analysis and monitoring plots.
 {
   echo ""
-  echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
+  echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
   echo "" 
   date
   echo ""
@@ -82,7 +77,7 @@ replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEv
   echo " -> NEVENTS: ${numEvents}"
   echo " -> COMMAND: ${runHcana}"
   echo ""
-  echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
+  echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
 
   sleep 2
   eval ${runHcana}
@@ -120,20 +115,8 @@ replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEv
   echo "Done analyzing ${SPEC} run ${runNum}."
   echo ""
   echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
-  echo "" 
-  echo ""
-  echo ""
 
   sleep 2
-  echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
-  echo ""
-  echo "Performing pedestal monitoring for ${SPEC} run ${runNum}."
-  echo ""
-  echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
-
-  sleep 2
-  eval ${runPedMon}
-  mv "${outFilePed}" "${pedMonOutDir}/${pedMonFile}"
 
   echo "" 
   echo ""
@@ -147,16 +130,9 @@ replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEv
   eval ${runReportMon}
   mv "${outFileMonitor}" "${reportMonOutDir}/${reportMonFile}"
   eval ${openReportMon}
+
   sleep 2
 
-  echo "" 
-  echo ""
-  echo ""
-  echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
-  echo ""
-  echo "Done producing report file monitoring data file ${SPEC} run ${runNum}."
-  echo ""
-  echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
   echo "" 
   echo ""
   echo ""
