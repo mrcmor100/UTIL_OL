@@ -102,9 +102,7 @@ replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEv
   eval ${runOnlineGUI}
   eval ${saveOnlineGUI}
   mv "${outFile}.pdf" "../HISTOGRAMS/${SPEC}/PDF/${outFile}.pdf"
-  mv "${outFile}.root" "../HISTOGRAMS/${SPEC}/ROOT/${outFile}.root"
   cd ..
-  ln -fs ${monRootFile} ${latestMonRootFile}
   ln -fs ${monPdfFile} ${latestMonPdfFile}
 
   echo "" 
