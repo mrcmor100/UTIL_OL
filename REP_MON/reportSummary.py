@@ -15,7 +15,7 @@ fout = open('output.txt','w')
 
 objList = ['Run #', 
            'BCM1 Beam Cut Current', 'BCM2 Beam Cut Current', 'BCM4A Beam Cut Current', 'BCM4B Beam Cut Current', 'BCM4C Beam Cut Current',
-           'SING FID TRACK EFFIC', 
+           'SING FID TRACK EFFIC', 'SHMS TRIG5 Computer Live Time',
            'Plane 1', 'Plane 2', 'Plane 3', 'Plane 4', '3_of_4 EFF']
 
 if (setting == 'singles') :
