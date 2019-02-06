@@ -23,6 +23,7 @@ numEvents=50000
 # Which scripts to run.
 script="SCRIPTS/${SPEC}/PRODUCTION/replay_production_${spec}.C"
 config="CONFIG/${SPEC}/PRODUCTION/${spec}_production.cfg"
+expertConfig="CONFIG/${SPEC}/PRODUCTION/${spec}_production_expert.cfg"
 
 # Define some useful directories
 rootFileDir="./ROOTfiles"
@@ -39,6 +40,7 @@ reportMonFile="reportMonitor_${spec}_${runNum}_${numEvents}.txt"
 runHcana="./hcana -q \"${script}(${runNum}, ${numEvents})\""
 runOnlineGUI="./online -f ${config} -r ${runNum}"
 saveOnlineGUI="./online -f ${config} -r ${runNum} -P"
+saveExpertOnlineGUI="./online -f ${expertConfig} -r ${runNum} -P"
 runReportMon="./${reportMonDir}/reportSummary.py ${runNum} ${numEvents} ${spec} singles"
 openReportMon="emacs ${reportMonOutDir}/${reportMonFile}"
 
@@ -50,6 +52,7 @@ latestRootFile="${rootFileDir}/${replayFile}_latest.root"
 # Names of the monitoring file
 monRootFile="${spec}_production_${runNum}.root"
 monPdfFile="${spec}_production_${runNum}.pdf"
+monExpertPdfFile="${spec}_production_expert_${runNum}.pdf"
 latestMonRootFile="${monRootDir}/${spec}_production_latest.root"
 latestMonPdfFile="${monPdfDir}/${spec}_production_latest.pdf"
 
@@ -59,6 +62,7 @@ summaryFile="${reportFileDir}/summary_production_${runNum}_${numEvents}.txt"
 
 # What is base name of onlineGUI output.
 outFile="${spec}_production_${runNum}"
+outExpertFile="${spec}_production_expert_${runNum}"
 outFileMonitor="output.txt"
 
 # Replay out files
@@ -100,10 +104,10 @@ replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEv
   sleep 2
   cd onlineGUI
   eval ${runOnlineGUI}
-  eval ${saveOnlineGUI}
-  mv "${outFile}.pdf" "../HISTOGRAMS/${SPEC}/PDF/${outFile}.pdf"
+  eval ${saveExpertOnlineGUI}
+  mv "${outExpertFile}.pdf" "../HISTOGRAMS/${SPEC}/PDF/${outExpertFile}.pdf"
   cd ..
-  ln -fs ${monPdfFile} ${latestMonPdfFile}
+  ln -fs ${monExpertPdfFile} ${latestMonPdfFile}
 
   echo "" 
   echo ""
