@@ -20,8 +20,12 @@ if [ -z "$runNum" ]; then
   runNum=$lastRun
 fi
 
-# How many events to analyze.
-numEvents=50000
+numEvents=$2
+if [ -z "$numEvents" ]; then
+  numEvents=50000
+fi
+
+firstevent=$numEvents-50000+1
 
 # Which scripts to run.
 script="SCRIPTS/${SPEC}/PRODUCTION/replay_production_${spec}_coin.C"
@@ -40,7 +44,7 @@ reportMonOutDir="./MON_OUTPUT/REPORT"
 reportMonFile="reportMonitor_${spec}_${runNum}_${numEvents}.txt" 
 
 # Which commands to run.
-runHcana="./hcana -q \"${script}(${runNum}, ${numEvents})\""
+runHcana="./hcana -q \"${script}(${runNum}, ${numEvents},${firstevent})\""
 runOnlineGUI="./online -f ${config} -r ${runNum}"
 saveOnlineGUI="./online -f ${config} -r ${runNum} -P"
 saveExpertOnlineGUI="./online -f ${expertConfig} -r ${runNum} -P"
