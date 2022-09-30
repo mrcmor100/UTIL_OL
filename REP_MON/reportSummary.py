@@ -8,10 +8,11 @@ spec    = sys.argv[3]
 setting = sys.argv[4]
 
 if (setting == 'singles') : filename = './REPORT_OUTPUT/%s/PRODUCTION/replay_%s_production_%s_%s.report' % (spec.upper(), spec, runNo, evenNo)
-if (setting == 'coin')    : filename = './REPORT_OUTPUT/%s/PRODUCTION/replay_%s_%s_production_%s_%s.report' % (spec.upper(), spec, setting, runNo, evenNo)
+if (setting == 'coin')    : filename = './REPORT_OUTPUT/COIN/replay_%s_%s_production_%s_%s.report' % (spec, setting, runNo, evenNo)
 
 f    = open(filename)
-fout = open('./MON_OUTPUT/REPORT/summary_output_%s.txt' % (runNo),'w')
+if(setting == 'coin'): fout = open('./MON_OUTPUT/COIN/REPORT/summary_output_%s.txt' % (runNo),'w')
+if(setting == 'singles'): fout = open('./MON_OUTPUT/${SPEC}/REPORT/summary_output_%s.txt' % (runNo),'w')
 
 objList = ['Run #', 
            'BCM1 Beam Cut Current', 'BCM2 Beam Cut Current', 'BCM4A Beam Cut Current', 'BCM4B Beam Cut Current', 'BCM4C Beam Cut Current',

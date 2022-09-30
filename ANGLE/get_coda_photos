@@ -17,7 +17,11 @@ my @DATA_DIRS = (
   ".",       # current directory
   "raw",     # should be symlink
   "cache",   # should be symlink tape /cache 
-  "raw.copiedtotape",     # should be symlink
+  "CACHE_LINKS/cache_pionlt",     # should be symlink
+  "CACHE_LINKS/cache_cafe",     # should be symlink
+  "CACHE_LINKS/cache_sp18",     # should be symlink
+  "CACHE_LINKS/cache_sp19",     # should be symlink
+  "CACHE_LINKS/cache_xem2",     # should be symlink
 );
 
 sub usage() {

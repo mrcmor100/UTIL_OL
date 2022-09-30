@@ -26,7 +26,7 @@ config="CONFIG/${SPEC}/PRODUCTION/${spec}_production.cfg"
 expertConfig="CONFIG/${SPEC}/PRODUCTION/${spec}_production_expert.cfg"
 
 # Define some useful directories
-rootFileDir="./ROOTfiles"
+rootFileDir="./ROOTfiles/${SPEC}/PRODUCTION"
 monRootDir="./HISTOGRAMS/${SPEC}/ROOT"
 monPdfDir="./HISTOGRAMS/${SPEC}/PDF"
 reportFileDir="./REPORT_OUTPUT/${SPEC}/PRODUCTION"
@@ -34,7 +34,7 @@ reportMonDir="./UTIL_OL/REP_MON"
 reportMonOutDir="./MON_OUTPUT/REPORT"
 
 # Name of the report monitoring file
-reportMonFile="reportMonitor_${spec}_${runNum}_${numEvents}.txt"
+reportMonFile="summary_output_${runNum}.txt"
 
 # Which commands to run.
 runHcana="./hcana -q \"${script}(${runNum}, ${numEvents})\""
@@ -130,7 +130,7 @@ replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEv
   echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
 
   eval ${runReportMon}
-  mv "${outFileMonitor}" "${reportMonOutDir}/${reportMonFile}"
+#  mv "${outFileMonitor}" "${reportMonOutDir}/${reportMonFile}"
   eval ${openReportMon}
 
   sleep 2
