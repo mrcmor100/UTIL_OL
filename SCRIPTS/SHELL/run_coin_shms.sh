@@ -33,10 +33,10 @@ config="CONFIG/${SPEC}/PRODUCTION/${spec}_coin_production_pionlt.cfg"
 expertConfig="CONFIG/${SPEC}/PRODUCTION/${spec}_coin_production_expert_pionlt.cfg"
 
 #Define some useful directories
-rootFileDir="./ROOTfiles/COIN"
+rootFileDir="./ROOTfiles/COIN/${spec}50k"
 monRootDir="./HISTOGRAMS/COIN/ROOT"
 monPdfDir="./HISTOGRAMS/COIN/PDF"
-reportFileDir="./REPORT_OUTPUT/${SPEC}"
+reportFileDir="./REPORT_OUTPUT/COIN/${spec}50k"
 reportMonDir="./UTIL_OL/REP_MON"
 reportMonOutDir="./MON_OUTPUT/COIN/REPORT" 
 
@@ -138,9 +138,9 @@ replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEv
   echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=" 
 
 
-  eval ${runReportMon}  
+#  eval ${runReportMon}  
 #  mv "${outFileMonitor}" "${reportMonOutDir}/${reportMonFile}" 
-  eval ${openReportMon}   
+#  eval ${openReportMon}   
 
   sleep 2
                                                                                         

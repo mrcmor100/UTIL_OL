@@ -17,27 +17,32 @@ if [ -z "$runNum" ]; then
   runNum=$lastRun
 fi
 
-# How many events to analyze.
-numEvents=50000
+numEvents=$2
+if [ -z "$numEvents" ]; then
+  numEvents=50000
+fi
 
 # Which scripts to run.
 script="SCRIPTS/${SPEC}/PRODUCTION/replay_production_${spec}.C"
 config="CONFIG/${SPEC}/PRODUCTION/${spec}_production.cfg"
 expertConfig="CONFIG/${SPEC}/PRODUCTION/${spec}_production_expert.cfg"
+hmsCounter="./UTIL_XEM/el_counter.C"
+shmsCounter="./UTIL_XEM/el_counter.C"
 
 # Define some useful directories
-rootFileDir="./ROOTfiles/${SPEC}/PRODUCTION"
+rootFileDir="./ROOTfiles/${SPEC}"
 monRootDir="./HISTOGRAMS/${SPEC}/ROOT"
 monPdfDir="./HISTOGRAMS/${SPEC}/PDF"
-reportFileDir="./REPORT_OUTPUT/${SPEC}/PRODUCTION"
+reportFileDir="./REPORT_OUTPUT/${SPEC}"
 reportMonDir="./UTIL_OL/REP_MON"
-reportMonOutDir="./MON_OUTPUT/REPORT"
+reportMonOutDir="./MON_OUTPUT/${SPEC}/REPORT"
 
 # Name of the report monitoring file
 reportMonFile="summary_output_${runNum}.txt"
 
 # Which commands to run.
 runHcana="./hcana -q \"${script}(${runNum}, ${numEvents})\""
+#runHcana="/home/cdaq/cafe-2022/hcana/hcana -q \"${script}(${runNum}, ${numEvents})\""
 runOnlineGUI="./online -f ${config} -r ${runNum}"
 saveOnlineGUI="./online -f ${config} -r ${runNum} -P"
 saveExpertOnlineGUI="./online -f ${expertConfig} -r ${runNum} -P"
@@ -57,7 +62,7 @@ latestMonRootFile="${monRootDir}/${spec}_production_latest.root"
 latestMonPdfFile="${monPdfDir}/${spec}_production_latest.pdf"
 
 # Where to put log
-reportFile="${reportFileDir}/replay_${spec}_production_${runNum}_${numEvents}.txt"
+reportFile="${reportFileDir}/replay_${spec}_production_${runNum}_${numEvents}.report"
 summaryFile="${reportFileDir}/summary_production_${runNum}_${numEvents}.txt"
 
 # What is base name of onlineGUI output.
@@ -66,7 +71,7 @@ outExpertFile="${spec}_production_expert_${runNum}"
 outFileMonitor="output.txt"
 
 # Replay out files
-replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEvents}.txt"
+replayReport="${reportFileDir}/REPLAY_REPORT/replayReport_${spec}_production_${runNum}_${numEvents}.txt"
 
 # Start analysis and monitoring plots.
 {
@@ -135,12 +140,36 @@ replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEv
 
   sleep 2
 
-  echo "" 
+  echo ""
+  echo ""
+  echo ""
+  echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
+  echo ""
+  echo "Counting good electrons in root file ${latestRootFile}"
+  echo ""
+  echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
+
+if [[ "${spec}" == "shms" ]]; then
+  ./hcana -b -l << EOF
+  .L ${shmsCounter}
+  run_calib_counter_${spec}("${latestRootFile}");
+EOF
+fi
+if [[ "${spec}" == "hms" ]]; then
+  ./hcana -b -l << EOF
+  .L ${hmsCounter}
+  run_calib_counter_${spec}("${latestRootFile}");
+EOF
+fi
+
+  sleep 2
+
+  echo ""
   echo ""
   echo ""
   echo "-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|"
   echo ""
-  echo "So long and thanks for all the fish!"
+  echo "Keep up the good work!"
   echo ""
   echo "-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|"
   echo "" 

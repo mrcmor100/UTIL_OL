@@ -7,16 +7,17 @@ evenNo  = sys.argv[2]
 spec    = sys.argv[3]
 setting = sys.argv[4]
 
-if (setting == 'singles') : filename = './REPORT_OUTPUT/%s/PRODUCTION/replay_%s_production_%s_%s.report' % (spec.upper(), spec, runNo, evenNo)
-if (setting == 'coin')    : filename = './REPORT_OUTPUT/COIN/replay_%s_%s_production_%s_%s.report' % (spec, setting, runNo, evenNo)
+if (setting == 'singles') : filename = './REPORT_OUTPUT/%s/%s50k/replay_%s_production_%s_%s.report' % (spec.upper(), spec, spec, runNo, evenNo)
+if (setting == 'coin')    : filename = './REPORT_OUTPUT/COIN/%s50k/replay_%s_%s_production_%s_%s.report' % (spec, spec, setting, runNo, evenNo)
 
 f    = open(filename)
 if(setting == 'coin'): fout = open('./MON_OUTPUT/COIN/REPORT/summary_output_%s.txt' % (runNo),'w')
-if(setting == 'singles'): fout = open('./MON_OUTPUT/${SPEC}/REPORT/summary_output_%s.txt' % (runNo),'w')
+if(setting == 'singles'): fout = open('./MON_OUTPUT/%s/REPORT/summary_output_%s.txt' % (spec.upper(), runNo),'w')
 
 objList = ['Run #', 
            'BCM1 Beam Cut Current', 'BCM2 Beam Cut Current', 'BCM4A Beam Cut Current', 'BCM4B Beam Cut Current', 'BCM4C Beam Cut Current',
-           'SING FID TRACK EFFIC',  'SHMS TRIG6 Computer Live Time',
+           'SING FID TRACK EFFIC',  'Pre-Scaled Ps1 %s Computer Live Time' % (spec.upper()), 'Pre-Scaled Ps2 %s Computer Live Time' % (spec.upper()),
+           'Pre-Scaled Ps3 %s Computer Live Time' % (spec.upper()),
            'Plane 1', 'Plane 2', 'Plane 3', 'Plane 4', '3_of_4 EFF']
 
 if (setting == 'singles') :
