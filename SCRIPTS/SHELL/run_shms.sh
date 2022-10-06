@@ -23,14 +23,14 @@ if [ -z "$numEvents" ]; then
 fi
 
 # Which scripts to run.
-script="SCRIPTS/${SPEC}/PRODUCTION/replay_production_${spec}.C"
+script="SCRIPTS/${SPEC}/PRODUCTION/replay_production_${spec}50k.C"
 config="CONFIG/${SPEC}/PRODUCTION/${spec}_production.cfg"
 expertConfig="CONFIG/${SPEC}/PRODUCTION/${spec}_production_expert.cfg"
 hmsCounter="./UTIL_XEM/el_counter.C"
 shmsCounter="./UTIL_XEM/el_counter.C"
 
 # Define some useful directories
-rootFileDir="./ROOTfiles/${SPEC}"
+rootFileDir="./ROOTfiles/${SPEC}/${spec}50k"
 monRootDir="./HISTOGRAMS/${SPEC}/ROOT"
 monPdfDir="./HISTOGRAMS/${SPEC}/PDF"
 reportFileDir="./REPORT_OUTPUT/${SPEC}"
@@ -152,12 +152,14 @@ replayReport="${reportFileDir}/REPLAY_REPORT/replayReport_${spec}_production_${r
 if [[ "${spec}" == "shms" ]]; then
   ./hcana -b -l << EOF
   .L ${shmsCounter}
+  run_el_counter_${spec}("${latestRootFile}");
   run_calib_counter_${spec}("${latestRootFile}");
 EOF
 fi
 if [[ "${spec}" == "hms" ]]; then
   ./hcana -b -l << EOF
   .L ${hmsCounter}
+  run_el_counter_${spec}("${latestRootFile}");
   run_calib_counter_${spec}("${latestRootFile}");
 EOF
 fi

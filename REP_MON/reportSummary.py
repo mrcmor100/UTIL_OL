@@ -17,7 +17,7 @@ if(setting == 'singles'): fout = open('./MON_OUTPUT/%s/REPORT/summary_output_%s.
 objList = ['Run #', 
            'BCM1 Beam Cut Current', 'BCM2 Beam Cut Current', 'BCM4A Beam Cut Current', 'BCM4B Beam Cut Current', 'BCM4C Beam Cut Current',
            'SING FID TRACK EFFIC',  'Pre-Scaled Ps1 %s Computer Live Time' % (spec.upper()), 'Pre-Scaled Ps2 %s Computer Live Time' % (spec.upper()),
-           'Pre-Scaled Ps3 %s Computer Live Time' % (spec.upper()),
+           'Pre-Scaled Ps3 %s Computer Live Time' % (spec.upper()), 'EDTM Trigger Rate',
            'Plane 1', 'Plane 2', 'Plane 3', 'Plane 4', '3_of_4 EFF']
 
 if (setting == 'singles') :
