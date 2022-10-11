@@ -57,7 +57,7 @@ prod_out_file="./ROOTfiles/${SPEC}/${spec}_replay_production_${runNum}_${numEven
   echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
 
   sleep 2
-  #eval ${runScal}
+  eval ${runScal}
   sleep 2
 
   echo ""
@@ -108,7 +108,7 @@ EOF
   echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
 
   sleep 2
-  ./hcana -b -l << EOF
+  ./hcana -l << EOF
   .L ${counter_script}
   run_el_counter_${spec}("${prod_out_file}");
 EOF

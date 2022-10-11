@@ -150,17 +150,15 @@ replayReport="${reportFileDir}/REPLAY_REPORT/replayReport_${spec}_production_${r
   echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
 
 if [[ "${spec}" == "shms" ]]; then
-  ./hcana -b -l << EOF
+  ./hcana -l << EOF
   .L ${shmsCounter}
   run_el_counter_${spec}("${latestRootFile}");
-  run_calib_counter_${spec}("${latestRootFile}");
 EOF
 fi
 if [[ "${spec}" == "hms" ]]; then
-  ./hcana -b -l << EOF
+  ./hcana -l << EOF
   .L ${hmsCounter}
   run_el_counter_${spec}("${latestRootFile}");
-  run_calib_counter_${spec}("${latestRootFile}");
 EOF
 fi
 
@@ -171,7 +169,7 @@ fi
   echo ""
   echo "-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|"
   echo ""
-  echo "Keep up the good work!"
+  echo "Keep up the good soup!"
   echo ""
   echo "-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|"
   echo "" 
