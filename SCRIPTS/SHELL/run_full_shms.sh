@@ -39,7 +39,7 @@ runScal="./hcana -l -b -q \"${scalar_script}(${runNum}, ${numEvents})\""
 bcm_param_out_dir="./PARAM/${SPEC}/BCM/"
 scalar_out_dir="./ROOTfiles/${SPEC}/SCALARS/"
 scalar_out_file="${scalar_out_dir}${spec}_replay_scalars_${runNum}_${numEvents}.root"
-prod_out_file="./ROOTfiles/${SPEC}/${spec}_replay_production_${runNum}_${numEvents}.root"
+prod_out_file="./ROOTfiles/${SPEC}/PRODUCTION/${spec}_replay_production_${runNum}_${numEvents}.root"
 
 # Start analysis and monitoring plots.
 {
@@ -57,7 +57,7 @@ prod_out_file="./ROOTfiles/${SPEC}/${spec}_replay_production_${runNum}_${numEven
   echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
 
   sleep 2
-  eval ${runScal}
+  #eval ${runScal}
   sleep 2
 
   echo ""
@@ -73,11 +73,11 @@ prod_out_file="./ROOTfiles/${SPEC}/${spec}_replay_production_${runNum}_${numEven
   echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
 
   sleep 2
-  ./hcana -b- l << EOF
-  .x ${bcm_calib_script}("${scalar_out_file}", "${SPEC_LETTER}", ${runNum})
-EOF
+  #./hcana -b- l << EOF
+  #.x ${bcm_calib_script}("${scalar_out_file}", "${SPEC_LETTER}", ${runNum})
+#EOF
 
-  mv bcmcurrent_${runNum}.param ${bcm_param_out_dir}
+#  mv bcmcurrent_${runNum}.param ${bcm_param_out_dir}
 
   echo ""
   echo ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:="
